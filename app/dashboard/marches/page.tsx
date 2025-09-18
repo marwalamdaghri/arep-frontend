@@ -114,12 +114,12 @@ export default function MarchesPage() {
         await fetchMarches()
         console.log("Marches loaded successfully")
       } catch (error) {
-        console.error("Error initializing page:", error)
-        if (error.response?.status === 401) {
-          router.push("/login")
-          return
-        }
-      } finally {
+  console.error("Error initializing page:", error)
+  if (axios.isAxiosError(error) && error.response?.status === 401) {
+    router.push("/login")
+    return
+  }
+} finally {
         console.log("Setting loading to false")
         setLoading(false)
       }
