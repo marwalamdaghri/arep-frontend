@@ -68,9 +68,9 @@ export default function DashboardPage() {
         }
       } catch (error) {
         console.error("Erreur initialisation dashboard:", error)
-        if (error.response?.status === 401) {
-          router.push("/login")
-          return
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+    router.push("/login")
+    return
         }
       } finally {
         setLoading(false)
